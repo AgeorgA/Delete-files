@@ -8,9 +8,9 @@ $DirToDelete = "C:\testdir\"
 $Extension = "*.*"
 
 $Today = Get-Date
-$LastWrite = $Today.AddDays(-$Days)
+$LastTouch = $Today.AddDays(-$Days)
 
-$Files = Get-Childitem $DirToDelete -Include $Extension -Recurse | Where{$_.CreationTime -le "$LastWrite" -and $_.LastWriteTime -le "$LastWrite"} | Sort-Object -Descending {$_.FullName.Split('\').Count},FullName
+$Files = Get-Childitem $DirToDelete -Include $Extension -Recurse | Where{$_.CreationTime -le "$LastTouch" -and $_.LastWriteTime -le "$LastTouch"} | Sort-Object -Descending {$_.FullName.Split('\').Count},FullName
 foreach ($File in $Files)
 {
  if ($File -ne $NULL -and !$File.PSIsContainer)
